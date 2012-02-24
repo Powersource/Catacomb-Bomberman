@@ -241,7 +241,8 @@ public class Player extends Mob implements LootCollector {
         for(Entity e : level.entities ){
         	if(e instanceof Bomb){
         		((Bomb) e).health--;
-        		System.out.println("Bombhealth" + ((Bomb) e).health);
+        		//debug line
+        		//System.out.println("Bombhealth" + ((Bomb) e).health);
         	}
         }
         

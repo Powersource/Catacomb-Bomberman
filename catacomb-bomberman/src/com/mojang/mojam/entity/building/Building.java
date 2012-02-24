@@ -52,7 +52,11 @@ public class Building extends Mob implements IUsable {
         if (freezeTime > 0) {
             return;
         }
-        if (hurtTime <= 0) health = maxHealth;
+        if(!(this instanceof Bomb)){
+        	if (hurtTime <= 0) health = maxHealth;
+        }
+        //removed this and added the if() above so the bombs wouldn't regenerate
+        //if (hurtTime <= 0) health = maxHealth;
 
         xd = 0.0;
         yd = 0.0;
