@@ -58,7 +58,8 @@ public class TestSynchronizer {
         @Override
         public void run() {
 
-            Random random = new Random();
+            @SuppressWarnings("unused")
+			Random random = new Random();
 
             while (true) {
                 packetLink.tick();

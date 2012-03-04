@@ -1,7 +1,7 @@
 package com.mojang.mojam.entity.building;
 
 import com.mojang.mojam.entity.Entity;
-import com.mojang.mojam.entity.mob.Team;
+//import com.mojang.mojam.entity.mob.Team;
 import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Bitmap;
 

@@ -39,7 +39,7 @@ public abstract class Mob extends Entity {
     }
 
     public void setStartHealth(int newHealth) {
-    	//maybe remove these 3 lines
+    	//maybe remove these 3 lines (prob not)
     	if(newHealth>10){
     		maxHealth=newHealth;
     	}

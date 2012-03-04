@@ -1,5 +1,7 @@
 package com.mojang.mojam.level.tile;
 
+import com.mojang.mojam.entity.animation.LargeBombExplodeAnimation;
+import com.mojang.mojam.entity.animation.TileExplodeAnimation;
 import com.mojang.mojam.level.Level;
 import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Screen;
@@ -57,6 +59,11 @@ public class FloorTile extends Tile {
             img = 2 * Art.floorTiles.length + (imageIndex & 3);
         }
         minimapColor = Art.floorTileColors[img & 7][img / 8];
+    }
+    
+    //I added this one. it makes the explsion animation also happen on these tiles
+    public void bomb(LargeBombExplodeAnimation largeBombExplodeAnimation) {
+        level.addEntity(new TileExplodeAnimation((x + 0.5) * Tile.WIDTH, (y + 0.5) * Tile.HEIGHT));
     }
 
     public boolean isBuildable() {

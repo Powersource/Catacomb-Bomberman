@@ -21,7 +21,13 @@ import com.mojang.mojam.entity.building.Turret;
 import com.mojang.mojam.entity.mob.Team;
 import com.mojang.mojam.gui.Font;
 import com.mojang.mojam.gui.Notifications;
-import com.mojang.mojam.level.tile.*;
+import com.mojang.mojam.level.tile.DestroyableWallTile;
+import com.mojang.mojam.level.tile.FloorTile;
+import com.mojang.mojam.level.tile.SandTile;
+import com.mojang.mojam.level.tile.Tile;
+import com.mojang.mojam.level.tile.UnbreakableRailTile;
+import com.mojang.mojam.level.tile.UnpassableSandTile;
+import com.mojang.mojam.level.tile.WallTile;
 import com.mojang.mojam.math.BB;
 import com.mojang.mojam.math.Vec2;
 import com.mojang.mojam.network.TurnSynchronizer;
@@ -285,6 +291,47 @@ public class Level {
 
         return result;
     }
+    
+    //my own getEntities that gets a cross shape
+    //public Set<Entity> getEntitiesCross(double xx0, double yy0, double xx1, double yy1, Class<? extends Entity> c) {
+    	/*int x0 = (int) (xx0) / Tile.WIDTH;
+        int x1 = (int) (xx1) / Tile.WIDTH;
+        int y0 = (int) (yy0) / Tile.HEIGHT;
+        int y1 = (int) (yy1) / Tile.HEIGHT;*/
+
+    	/*int x0 = 0;
+        int x1 = width;
+        int y0 = 0;
+        int y1 = height;
+    	
+        Set<Entity> result = new TreeSet<Entity>(new EntityComparator());
+
+        for (int y = y0; y <= y1; y++) {
+            if (y < 0 || y >= height) continue;
+            for (int x = x0; x <= x1; x++) {
+                if (x < 0 || x >= width) continue;
+                List<Entity> entities = entityMap[x + y * width];
+                for (int i = 0; i < entities.size(); i++) {
+                    Entity e = entities.get(i);
+                    if (!c.isInstance(e)) continue;
+                    if (e.removed) continue;
+                    if (e.intersects(x0, y0, x1, y1)) {
+                        result.add(e);
+                    }
+                }
+            }
+        }*/
+    	
+    	/*for(Entity e : this.entities ){
+        	if(e instanceof Entity){
+        		((Bomb) e).health--;
+        		//debug line
+        		//System.out.println("Bombhealth" + ((Bomb) e).health);
+        	}
+        }*/
+    	
+        //return result;
+    //}
 
     public Set<Entity> getEntitiesSlower(double xx0, double yy0, double xx1, double yy1, Class<? extends Entity> c) {
         Set<Entity> result = new TreeSet<Entity>(new EntityComparator());

@@ -1,6 +1,7 @@
 package com.mojang.mojam.entity.animation;
 
 import com.mojang.mojam.entity.Entity;
+import com.mojang.mojam.entity.building.Bomb;
 import com.mojang.mojam.level.tile.Tile;
 import com.mojang.mojam.network.TurnSynchronizer;
 import com.mojang.mojam.screen.Screen;
@@ -31,13 +32,39 @@ public class LargeBombExplodeAnimation extends Animation {
             }
             int xt = (int) (pos.x / Tile.WIDTH);
             int yt = (int) (pos.y / Tile.WIDTH);
-            int r = 2;
+            
+            //this is the range for the bomb's block destroying. i think it was 2 at first
+            int r = (int)Bomb.BOMB_DISTANCE/Tile.HEIGHT;
+
+            //this new explosion is shaped like a cross
             for (int yy = yt - r; yy <= yt + r; yy++) {
+            	try{
+            	level.getTile(xt, yy).bomb(this);
+            	} catch (Exception herpderp)
+            	{
+            		//System.out.println(herpderp);
+            		System.out.println("It tried to blow something up that is outside the level.");
+            	}
+            }
+            for (int xx = xt - r; xx <= xt + r; xx++) {
+            	try{
+            	level.getTile(xx, yt).bomb(this);
+            	} catch (Exception herpderp)
+            	{
+            		//System.out.println(herpderp);
+            		System.out.println("It tried to blow something up that is outside the level.");
+            	}
+            }
+            
+            //this is the original square explosion
+            /*for (int yy = yt - r; yy <= yt + r; yy++) {
                 for (int xx = xt - r; xx <= xt + r; xx++) {
                     level.getTile(xx, yy).bomb(this);
                 }
-            }
-//            level.bomb(pos.x, pos.y, 16);
+            }*/
+            
+            //This was commented out before I got here
+            //level.bomb(pos.x, pos.y, 16);
         }
     }
 
