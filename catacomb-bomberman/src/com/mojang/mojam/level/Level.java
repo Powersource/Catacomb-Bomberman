@@ -155,7 +155,8 @@ public class Level {
             double y = (random.nextInt(height - 16) + 8) * Tile.HEIGHT + Tile.HEIGHT / 2 - 4;
             final Tile tile = getTile((int) (x / Tile.WIDTH), (int) (y / Tile.HEIGHT));
             if (tile instanceof FloorTile) {
-                addEntity(new SpawnerEntity(x, y, Team.Neutral, 0));
+            	//no enemies
+                //addEntity(new SpawnerEntity(x, y, Team.Neutral, 0));
             }
         }
 
@@ -372,7 +373,8 @@ public class Level {
                     if (getEntities(new BB(null, x - r, y - r, x + r, y + r), SpawnerEntity.class).size() == 0) {
                         r = 32 * 4;
                         if (getEntities(new BB(null, x - r, y - r, x + r, y + r), Turret.class).size() == 0) {
-                            addEntity(new SpawnerEntity(x, y, Team.Neutral, random.nextInt(3)));
+                            //no enemies
+                        	//addEntity(new SpawnerEntity(x, y, Team.Neutral, random.nextInt(3)));
                         }
                     }
                 }
