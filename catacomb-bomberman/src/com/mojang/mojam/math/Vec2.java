@@ -1,5 +1,7 @@
 package com.mojang.mojam.math;
 
+import com.mojang.mojam.level.tile.Tile;
+
 public class Vec2 {
 
     public double x, y;
@@ -34,6 +36,14 @@ public class Vec2 {
 
     public Vec2 clone() {
         return new Vec2(x, y);
+    }
+    
+    //my own that returns the middle of a tile
+    public Vec2 cloneMiddleOfTile(){
+    	double xA=(Math.floor(x/Tile.WIDTH)+0.5)*Tile.WIDTH;
+    	double yA=(Math.floor(y/Tile.HEIGHT)+0.5)*Tile.HEIGHT;
+    	System.out.println("x=" + xA + "y=" + yA);
+    	return new Vec2(xA, yA);
     }
 
     public Vec2 add(Vec2 p) {

@@ -238,6 +238,7 @@ public class Player extends Mob implements LootCollector {
             player.pickup(item);
         }
         
+        //move this line to somewhere better. right now it causes the bomb to explode twice as fast in mp
         for(Entity e : level.entities ){
         	if(e instanceof Bomb){
         		((Bomb) e).health--;
@@ -251,7 +252,8 @@ public class Player extends Mob implements LootCollector {
             carrying.tick();
 
             if (keys.use.wasPressed()) {
-                Vec2 buildPos = pos.clone();
+                //Vec2 buildPos = pos.clone();
+            	Vec2 buildPos = pos.cloneMiddleOfTile();
                 @SuppressWarnings("unused")
 				Tile tile = level.getTile(buildPos);
 //                if (tile != null && tile.isBuildable()) {
@@ -265,8 +267,9 @@ public class Player extends Mob implements LootCollector {
  */
                 if (allowed && (!(carrying instanceof IUsable) || (carrying instanceof IUsable && ((IUsable) carrying).isAllowedToCancel()))) {
                     carrying.removed = false;
-                    carrying.xSlide = xAim * 3;
-                    carrying.ySlide = yAim * 3;
+                    //now the bomb doesn't slide when you drop it
+                    carrying.xSlide = 0;//xAim * 3;
+                    carrying.ySlide = 0;//yAim * 3;
                     carrying.freezeTime = 10;
                     carrying.setPos(buildPos.x, buildPos.y);
                     level.addEntity(carrying);
