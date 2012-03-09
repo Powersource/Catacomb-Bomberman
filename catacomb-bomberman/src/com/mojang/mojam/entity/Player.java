@@ -238,14 +238,14 @@ public class Player extends Mob implements LootCollector {
             player.pickup(item);
         }
         
-        //move this line to somewhere better. right now it causes the bomb to explode twice as fast in mp
-        for(Entity e : level.entities ){
+        //move this line to somewhere better. right now it causes the bomb to explode twice as fast in mp. moved it to Level.java and it works.
+        /*for(Entity e : level.entities ){
         	if(e instanceof Bomb){
         		((Bomb) e).health--;
         		//debug line
         		//System.out.println("Bombhealth" + ((Bomb) e).health);
         	}
-        }
+        }*/
         
         if (carrying != null) {
             carrying.setPos(pos.x, pos.y - 20);

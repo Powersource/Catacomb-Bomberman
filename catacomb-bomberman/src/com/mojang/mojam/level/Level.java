@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import com.mojang.mojam.MojamComponent;
 import com.mojang.mojam.entity.Entity;
 import com.mojang.mojam.entity.Player;
+import com.mojang.mojam.entity.building.Bomb;
 import com.mojang.mojam.entity.building.ShopItem;
 import com.mojang.mojam.entity.building.SpawnerEntity;
 import com.mojang.mojam.entity.building.TreasurePile;
@@ -399,6 +400,15 @@ public class Level {
             }
         }
 
+        //testing if putting it here instead of in Player.java helps. Seems like it helped!
+        for(Entity e : this.entities ){
+        	if(e instanceof Bomb){
+        		((Bomb) e).health--;
+        		//debug line
+        		//System.out.println("Bombhealth" + ((Bomb) e).health);
+        	}
+        }
+        
         Notifications.getInstance().tick();
     }
 
