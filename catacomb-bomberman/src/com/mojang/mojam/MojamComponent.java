@@ -131,7 +131,7 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
 
     private synchronized void createLevel() {
         try {
-            level = Level.fromFile("/levels/level1.bmp");
+            level = Level.fromFile("/levels/test.bmp");
         } catch (Exception ex) {
             throw new RuntimeException("Unable to load level", ex);
         }
