@@ -49,7 +49,7 @@ public class Turret extends Building {
         for (Entity e : entities) {
             if (!(e instanceof Mob)) continue;
             if ((e instanceof RailDroid)) continue;
-            //min rad, bästa raden någonsin, fixar så turreten inte skjuter på skatten
+            //min rad, bsta raden ngonsin, fixar s turreten inte skjuter p skatten
             if ((e instanceof TreasurePile)) continue;
             if (!((Mob) e).isNotFriendOf(this)) continue;
             final double dist = e.pos.distSqr(pos);

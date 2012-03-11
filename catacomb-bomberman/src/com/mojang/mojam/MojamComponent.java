@@ -131,14 +131,15 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
 
     private synchronized void createLevel() {
         try {
-            level = Level.fromFile("/levels/level1.bmp");
+            level = Level.fromFile("/levels/test.bmp");
         } catch (Exception ex) {
             throw new RuntimeException("Unable to load level", ex);
         }
 
         level.init();
 
-        players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, (level.height - 5 - 1) * Tile.HEIGHT - 16, Team.Team1);
+        //players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, (level.height - 5 - 1) * Tile.HEIGHT - 16, Team.Team1);
+        players[0] = new Player(synchedKeys[0], (level.width-15)* Tile.WIDTH / 2 - 16, (level.height - 9) * Tile.HEIGHT - 16, Team.Team1);
         players[0].setFacing(4);
         level.addEntity(players[0]);
         level.addEntity(new Base(34 * Tile.WIDTH, 7 * Tile.WIDTH, Team.Team1));
