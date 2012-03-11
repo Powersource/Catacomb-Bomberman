@@ -134,8 +134,8 @@ public class Level {
             }
         }
 
-        l.setTile(31, 7, new UnbreakableRailTile(new SandTile()));
-        l.setTile(31, 63 - 7, new UnbreakableRailTile(new SandTile()));
+        //l.setTile(31, 7, new UnbreakableRailTile(new SandTile()));
+        //l.setTile(31, 63 - 7, new UnbreakableRailTile(new SandTile()));
 
         for (int y = 0; y < h + 1; y++) {
             for (int x = 0; x < w + 1; x++) {
