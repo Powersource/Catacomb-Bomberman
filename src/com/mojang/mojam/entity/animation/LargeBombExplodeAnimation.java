@@ -2,7 +2,9 @@ package com.mojang.mojam.entity.animation;
 
 import com.mojang.mojam.entity.Entity;
 import com.mojang.mojam.entity.building.Bomb;
+import com.mojang.mojam.level.tile.DestroyableWallTile;
 import com.mojang.mojam.level.tile.Tile;
+import com.mojang.mojam.level.tile.WallTile;
 import com.mojang.mojam.network.TurnSynchronizer;
 import com.mojang.mojam.screen.Screen;
 
@@ -37,23 +39,45 @@ public class LargeBombExplodeAnimation extends Animation {
             int r = (int)Bomb.BOMB_DISTANCE/Tile.HEIGHT;
 
             //this new explosion is shaped like a cross
-            for (int yy = yt - r; yy <= yt + r; yy++) {
-            	try{
-            	level.getTile(xt, yy).bomb(this);
-            	} catch (Exception herpderp)
-            	{
-            		//System.out.println(herpderp);
-            		System.out.println("It tried to blow something up that is outside the level.");
-            	}
+            //top 
+            for (int yy = yt; yy > yt - r; yy--) {
+                try {
+                    Tile t = level.getTile(xt, yy);
+                    if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
+                    t.bomb(this);
+            	} catch (Exception herpderp) {
+                    System.out.println("It tried to blow something up that is outside the level.");
+            	}            
             }
-            for (int xx = xt - r; xx <= xt + r; xx++) {
-            	try{
-            	level.getTile(xx, yt).bomb(this);
-            	} catch (Exception herpderp)
-            	{
-            		//System.out.println(herpderp);
-            		System.out.println("It tried to blow something up that is outside the level.");
-            	}
+            //bottom
+            for (int yy = yt; yy <= yt + r; yy++) {
+                try {
+                    Tile t = level.getTile(xt, yy);
+                    if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
+                    t.bomb(this);
+            	} catch (Exception herpderp) {
+                    System.out.println("It tried to blow something up that is outside the level.");
+            	}            
+            }
+            // left
+            for (int xx = xt; xx > xt - r; xx--) {
+            	try {
+                    Tile t = level.getTile(xx, yt);
+                    if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
+                    t.bomb(this);
+                } catch (Exception herpderp) {
+                    System.out.println("It tried to blow something up that is outside the level.");
+            	} 
+            }
+            // right
+            for (int xx = xt; xx <= xt + r; xx++) {
+            	try {
+                    Tile t = level.getTile(xx, yt);
+                    if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
+                    t.bomb(this);
+                } catch (Exception herpderp) {
+                    System.out.println("It tried to blow something up that is outside the level.");
+            	} 
             }
             
             //this is the original square explosion
