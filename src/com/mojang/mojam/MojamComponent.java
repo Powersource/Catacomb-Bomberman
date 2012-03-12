@@ -138,16 +138,17 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
 
         level.init();
 
-        //players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, (level.height - 5 - 1) * Tile.HEIGHT - 16, Team.Team1);
         players[0] = new Player(synchedKeys[0], (level.width-15)* Tile.WIDTH / 2 - 16, (level.height - 9) * Tile.HEIGHT - 16, Team.Team1);
+        //players[0] = new Player(synchedKeys[0], (level.width+17)* Tile.WIDTH / 2 - 16, 10 * Tile.HEIGHT - 16, Team.Team1);
+
         players[0].setFacing(4);
         level.addEntity(players[0]);
-        level.addEntity(new Base(34 * Tile.WIDTH, 7 * Tile.WIDTH, Team.Team1));
+        //level.addEntity(new Base(34 * Tile.WIDTH, 7 * Tile.WIDTH, Team.Team1));
         if (isMultiplayer) {
-            players[1] = new Player(synchedKeys[1], level.width * Tile.WIDTH / 2 - 16, 7 * Tile.HEIGHT - 16, Team.Team2);
+            players[1] = new Player(synchedKeys[1], (level.width+17)* Tile.WIDTH / 2 - 16, 10 * Tile.HEIGHT - 16, Team.Team2);
 //            players[1] = new Player(synchedKeys[1], 10, 10);
             level.addEntity(players[1]);
-            level.addEntity(new Base(32 * Tile.WIDTH - 20, 32 * Tile.WIDTH - 20, Team.Team2));
+            //level.addEntity(new Base(32 * Tile.WIDTH - 20, 32 * Tile.WIDTH - 20, Team.Team2));
         }
         player = players[localId];
         player.setCanSee(true);
