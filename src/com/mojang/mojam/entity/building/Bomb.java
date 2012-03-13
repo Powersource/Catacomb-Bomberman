@@ -6,7 +6,9 @@ import com.mojang.mojam.entity.Player;
 import com.mojang.mojam.entity.animation.LargeBombExplodeAnimation;
 import com.mojang.mojam.entity.mob.Mob;
 import com.mojang.mojam.entity.mob.Team;
+import com.mojang.mojam.level.tile.DestroyableWallTile;
 import com.mojang.mojam.level.tile.Tile;
+import com.mojang.mojam.level.tile.WallTile;
 import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Bitmap;
 
@@ -17,7 +19,7 @@ public class Bomb extends Building {
 
     public Bomb(double x, double y) {
         super(x, y, Team.Neutral);
-        setStartHealth(50);
+        setStartHealth(150);
         yOffs = 2;
         setSize(7, 7);
     }
@@ -46,14 +48,25 @@ public class Bomb extends Building {
             //}
         }*/
         //hurts player if standing south/west/north/east of the bomb but not diagonally
+        System.out.println("#entities: "+level.entities.size());
+        int blax = (int) (pos.x-16)/Tile.WIDTH;
+        int blay = (int) (pos.y-16)/Tile.HEIGHT;
         for(Entity e : level.entities ){
-        	if(e instanceof Player){
-        		if(e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y>pos.y-BOMB_DISTANCE && e.pos.y<pos.y+BOMB_DISTANCE){
-        			((Player) e).hurt(this,5);
-        		}else if(e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-BOMB_DISTANCE && e.pos.x<pos.x+BOMB_DISTANCE){
-        			((Player) e).hurt(this,5);
-        		}
-        	}
+            if(e instanceof Player){
+                if( // top
+                    (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y>pos.y-BOMB_DISTANCE && e.pos.y<pos.y &&
+                    (!(level.getTile(blax, blay-1) instanceof WallTile) || level.getTile(blax, blay-1) instanceof DestroyableWallTile)) ||
+                    //bottom
+                    (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y<pos.y+BOMB_DISTANCE && e.pos.y>pos.y &&
+                    (!(level.getTile(blax, blay+1) instanceof WallTile) || level.getTile(blax, blay+1) instanceof DestroyableWallTile)) ||
+                    //right
+                    (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-BOMB_DISTANCE && e.pos.x<pos.x &&
+                    (!(level.getTile(blax-1, blay) instanceof WallTile) || level.getTile(blax-1, blay) instanceof DestroyableWallTile)) ||
+                    //left
+                    (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) &&  e.pos.x<pos.x+BOMB_DISTANCE && e.pos.x>pos.x &&
+                    (!(level.getTile(blax+1, blay) instanceof WallTile) || level.getTile(blax+1, blay) instanceof DestroyableWallTile))                   
+                ) ((Player) e).hurt(this,5);
+            }
         }
         
         //spawns
