@@ -53,19 +53,67 @@ public class Bomb extends Building {
         int blay = (int) (pos.y-16)/Tile.HEIGHT;
         for(Entity e : level.entities ){
             if(e instanceof Player){
-                if( // top
+            	int[] rangeCheck = new int[4];
+            	//top
+            	rangeCheck[0]=(int)BOMB_DISTANCE/Tile.HEIGHT;
+            	//bottom
+            	rangeCheck[1]=(int)BOMB_DISTANCE/Tile.HEIGHT;
+            	//left
+            	rangeCheck[2]=(int)BOMB_DISTANCE/Tile.HEIGHT;
+            	//right
+            	rangeCheck[3]=(int)BOMB_DISTANCE/Tile.HEIGHT;
+            	
+            	for(int i=(int)BOMB_DISTANCE/Tile.HEIGHT; i>0; i--){
+            		//checking the range to the (possible) walls
+            		//top
+            		if(level.getTile(blax, blay-i) instanceof WallTile && !(level.getTile(blax, blay-i) instanceof DestroyableWallTile)){
+            			rangeCheck[0]=i-1;
+            		}
+            		//bottom
+            		if(level.getTile(blax, blay+i) instanceof WallTile && !(level.getTile(blax, blay+i) instanceof DestroyableWallTile)){
+            			rangeCheck[1]=i-1;
+            		}
+            		//left
+            		if(level.getTile(blax-i, blay) instanceof WallTile && !(level.getTile(blax-i, blay) instanceof DestroyableWallTile)){
+            			rangeCheck[2]=i-1;
+            		}
+            		//right
+            		if(level.getTile(blax+i, blay) instanceof WallTile && !(level.getTile(blax+i, blay) instanceof DestroyableWallTile)){
+            			rangeCheck[3]=i-1;
+            		}
+            	}
+            	//System.out.println("top:"+rangeCheck[0]+"bottom:"+rangeCheck[1]+"left:"+rangeCheck[2]+"right:"+rangeCheck[3]);
+            		//damaging
+            	rangeCheck[0]*=Tile.HEIGHT;
+            	rangeCheck[1]*=Tile.HEIGHT;
+            	rangeCheck[2]*=Tile.HEIGHT;
+            	rangeCheck[3]*=Tile.HEIGHT;
+            	
+            	if( 
+            				// top
+                            (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y>pos.y-rangeCheck[0] && e.pos.y<pos.y) ||
+                            //bottom
+                            (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y<pos.y+rangeCheck[1] && e.pos.y>pos.y) ||
+                            //left
+                            (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-rangeCheck[2] && e.pos.x<pos.x) ||
+                            //right
+                            (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) &&  e.pos.x<pos.x+rangeCheck[3] && e.pos.x>pos.x)                   
+                        ) ((Player) e).hurt(this,5);
+            		
+                /*if( // top
                     (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y>pos.y-BOMB_DISTANCE && e.pos.y<pos.y &&
-                    (!(level.getTile(blax, blay-1) instanceof WallTile) || level.getTile(blax, blay-1) instanceof DestroyableWallTile)) ||
+                    (!(level.getTile(blax, blay-i) instanceof WallTile) || level.getTile(blax, blay-i) instanceof DestroyableWallTile)) ||
                     //bottom
                     (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y<pos.y+BOMB_DISTANCE && e.pos.y>pos.y &&
-                    (!(level.getTile(blax, blay+1) instanceof WallTile) || level.getTile(blax, blay+1) instanceof DestroyableWallTile)) ||
+                    (!(level.getTile(blax, blay+i) instanceof WallTile) || level.getTile(blax, blay+i) instanceof DestroyableWallTile)) ||
                     //right
                     (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-BOMB_DISTANCE && e.pos.x<pos.x &&
-                    (!(level.getTile(blax-1, blay) instanceof WallTile) || level.getTile(blax-1, blay) instanceof DestroyableWallTile)) ||
+                    (!(level.getTile(blax-i, blay) instanceof WallTile) || level.getTile(blax-i, blay) instanceof DestroyableWallTile)) ||
                     //left
                     (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) &&  e.pos.x<pos.x+BOMB_DISTANCE && e.pos.x>pos.x &&
-                    (!(level.getTile(blax+1, blay) instanceof WallTile) || level.getTile(blax+1, blay) instanceof DestroyableWallTile))                   
-                ) ((Player) e).hurt(this,5);
+                    (!(level.getTile(blax+i, blay) instanceof WallTile) || level.getTile(blax+i, blay) instanceof DestroyableWallTile))                   
+                ) ((Player) e).hurt(this,5);*/
+            	
             }
         }
         

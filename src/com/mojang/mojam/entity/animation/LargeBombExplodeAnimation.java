@@ -40,7 +40,7 @@ public class LargeBombExplodeAnimation extends Animation {
 
             //this new explosion is shaped like a cross
             //top 
-            for (int yy = yt; yy > yt - r; yy--) {
+            for (int yy = yt; yy >= yt - r; yy--) {
                 try {
                     Tile t = level.getTile(xt, yy);
                     if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
@@ -60,7 +60,7 @@ public class LargeBombExplodeAnimation extends Animation {
             	}            
             }
             // left
-            for (int xx = xt; xx > xt - r; xx--) {
+            for (int xx = xt; xx >= xt - r; xx--) {
             	try {
                     Tile t = level.getTile(xx, yt);
                     if(t instanceof WallTile && !((t instanceof DestroyableWallTile))) break;
