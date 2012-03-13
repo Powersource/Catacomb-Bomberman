@@ -57,13 +57,13 @@ public class Bomb extends Building {
                     (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y>pos.y-BOMB_DISTANCE && e.pos.y<pos.y &&
                     (!(level.getTile(blax, blay-1) instanceof WallTile) || level.getTile(blax, blay-1) instanceof DestroyableWallTile)) ||
                     //bottom
-                    ((e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y<pos.y+BOMB_DISTANCE) &&
+                    (e.pos.x>pos.x-(Tile.WIDTH/2) && e.pos.x<pos.x+(Tile.WIDTH/2) && e.pos.y<pos.y+BOMB_DISTANCE && e.pos.y>pos.y &&
                     (!(level.getTile(blax, blay+1) instanceof WallTile) || level.getTile(blax, blay+1) instanceof DestroyableWallTile)) ||
                     //right
-                    ((e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-BOMB_DISTANCE) &&
+                    (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) && e.pos.x>pos.x-BOMB_DISTANCE && e.pos.x<pos.x &&
                     (!(level.getTile(blax-1, blay) instanceof WallTile) || level.getTile(blax-1, blay) instanceof DestroyableWallTile)) ||
                     //left
-                    ((e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) &&  e.pos.x<pos.x+BOMB_DISTANCE) &&
+                    (e.pos.y>pos.y-(Tile.HEIGHT/2) && e.pos.y<pos.y+(Tile.HEIGHT/2) &&  e.pos.x<pos.x+BOMB_DISTANCE && e.pos.x>pos.x &&
                     (!(level.getTile(blax+1, blay) instanceof WallTile) || level.getTile(blax+1, blay) instanceof DestroyableWallTile))                   
                 ) ((Player) e).hurt(this,5);
             }
