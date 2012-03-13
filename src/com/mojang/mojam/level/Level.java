@@ -413,7 +413,8 @@ public class Level {
     }
 
     private boolean hasSeen(int x, int y) {
-        return seen[x + y * (width + 1)] || seen[(x + 1) + y * (width + 1)] || seen[x + (y + 1) * (width + 1)] || seen[(x + 1) + (y + 1) * (width + 1)];
+        return true;
+        //return seen[x + y * (width + 1)] || seen[(x + 1) + y * (width + 1)] || seen[x + (y + 1) * (width + 1)] || seen[(x + 1) + (y + 1) * (width + 1)];
     }
 
     public void render(Screen screen, int xScroll, int yScroll) {
@@ -490,7 +491,7 @@ public class Level {
  * (rowEntities[row] != null) { for (Entity e : rowEntities[row]) {
  * e.render(screen); } } }
  */
-
+        /*
         for (int y = y0; y <= y1; y++) {
             if (y < 0 || y >= height) continue;
             for (int x = x0; x <= x1; x++) {
@@ -530,7 +531,7 @@ public class Level {
                     if (c1 && c3) screen.blit(Art.darkness[0][1], x * Tile.WIDTH, y * Tile.WIDTH + yo);
                 }
             }
-        }
+        }*/
 
         screen.setOffset(0, 0);
 
@@ -571,9 +572,11 @@ public class Level {
     }
 
     private boolean canSee(int x, int y) {
-        if (x < 0 || y < 1 || x >= width || y >= height) return true;
+        return true;
+        /*if (x < 0 || y < 1 || x >= width || y >= height) return true;
         return seen[x + (y - 1) * (width + 1)] || seen[(x + 1) + (y - 1) * (width + 1)] || seen[x + y * (width + 1)] || seen[(x + 1) + y * (width + 1)] || seen[x + (y + 1) * (width + 1)]
                 || seen[(x + 1) + (y + 1) * (width + 1)];
+        */
     }
 
     public List<BB> getClipBBs(Entity e) {
